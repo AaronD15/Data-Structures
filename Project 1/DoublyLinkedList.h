@@ -16,12 +16,16 @@ public:
 
   ~DoublyLinkedList() {
     DoubleNode<T>* p = head;
+    if (p == NULL)
+    {}
+    else {
     DoubleNode<T>* q = p->next;
     while(p != NULL){
       delete p;
       p = q;
       if(q->next != NULL)
         q = q->next;
+      }
     }
   }
 
