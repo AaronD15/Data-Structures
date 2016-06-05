@@ -1,3 +1,9 @@
+//*************************************************//
+//	Project 1											 							   //
+//	Aaron Moton					        June 5th, 2016		 //
+//	Luis Dominguez																 //
+//*************************************************//
+
 #include "SingleNode.h"
 
 template<class t> class CyclicLinkedList {
@@ -13,7 +19,7 @@ public:
 		SingleNode<t> *current = head;
 		SingleNode<t> *next;
 
-		while (true) {
+		while (current != NULL) {
 			next = current->next;
 			if (current == tail) {
 				delete current;
@@ -27,8 +33,19 @@ public:
 
 	int SIZE() const { return size; }
 	bool empty() const { return size == 0; }
-	t front() const { return head->data; }
-	t back() const { return tail->data; }
+	t front() const {
+		if(empty())
+			throw underflow_error("List is empty.");
+		else
+			return head->data;
+	}
+	t back() const {
+		if(empty())
+			throw underflow_error("List is empty.");
+		else
+			return tail->data;
+	}
+
 	SingleNode<t> * HEAD() const { return head; }
 	SingleNode<t> * TAIL() const { return tail; }
 
@@ -98,7 +115,7 @@ public:
 	void printList()const {
 		if (size == 0)
 		{
-			cout << "List Empty" << endl;
+			cout << "List empty." << endl;
 			return;
 		}
 		SingleNode<t> *ptr = head;
@@ -111,10 +128,9 @@ public:
 	}
 
 	t pop_front() {
-		if (size == 0) {
-			cerr << endl << "List empty" << endl;
-			return 0;
-		}
+		if (empty())
+			throw underflow_error("List is empty.");
+		else {
 		SingleNode<t> *pop = head;
 		SingleNode<t> *ptr = head;
 		t popdata;
@@ -125,7 +141,9 @@ public:
 		delete pop;
 		size--;
 		return popdata;
+		}
 	}
+
 
 	int erase(t const & data) {
 		if (size == 0) {

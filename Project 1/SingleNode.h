@@ -1,3 +1,9 @@
+//*************************************************//
+//	Project 1											 							   //
+//	Aaron Moton					        June 5th, 2016		 //
+//	Luis Dominguez																 //
+//*************************************************//
+
 #include <iostream>
 #include <cassert>
 using namespace std;
