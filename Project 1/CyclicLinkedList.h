@@ -7,7 +7,23 @@ private:
 	int size;
 
 public:
-	CyclicLinkedList():head(NULL), tail(NULL), size(0){}
+	CyclicLinkedList() :head(NULL), tail(NULL), size(0) {}
+
+	~CyclicLinkedList() {
+		SingleNode<t> *current = head;
+		SingleNode<t> *next;
+
+		while (true) {
+			next = current->next;
+			if (current == tail) {
+				delete current;
+				break;
+			}
+			delete current;
+			current = next;
+		}
+
+	}
 
 	int SIZE() const { return size; }
 	bool empty() const { return size == 0; }
@@ -16,7 +32,12 @@ public:
 	SingleNode<t> * HEAD() const { return head; }
 	SingleNode<t> * TAIL() const { return tail; }
 
-	int count(t const & data) const { 
+	int count(t const & data) const {
+		if (size == 0)
+		{
+			cout << "List Empty" << endl;
+			return 0;
+		}
 		int count = 0;
 		SingleNode<t> *ptr = head;
 		SingleNode<t> *ptr2 = tail;
@@ -81,13 +102,13 @@ public:
 			return;
 		}
 		SingleNode<t> *ptr = head;
+		cout << ptr->data << endl;
+		ptr = ptr->next;
+		while (ptr != head && ptr != NULL) {
 			cout << ptr->data << endl;
 			ptr = ptr->next;
-			while (ptr != head && ptr != NULL) {
-				cout << ptr->data << endl;
-				ptr = ptr->next;
-			}
 		}
+	}
 
 	t pop_front() {
 		if (size == 0) {
@@ -97,7 +118,7 @@ public:
 		SingleNode<t> *pop = head;
 		SingleNode<t> *ptr = head;
 		t popdata;
-	
+
 		head = ptr->next;
 		tail->next = head;
 		popdata = pop->data;
@@ -116,6 +137,7 @@ public:
 		int count = 0;
 		if (prev->data == data && size == 1)
 		{
+			delete prev;
 			head = NULL;
 			tail = NULL;
 			size--;
@@ -126,24 +148,28 @@ public:
 			if (prev->data == data) {
 				head = prev->next;
 				tail->next = head;
+				delete prev;
 				count++;
 				size--;
 			}
 			else if (ptr->data == data) {
-					if (ptr == tail) {
-						tail = prev;
-						tail->next = head;
-					}
-					else {
-						prev->next = ptr->next;
-						ptr = prev;
-					}
-					count++;
-					size--;
+				if (ptr == tail) {
+					delete ptr;
+					ptr = head;
+					tail = prev;
+					tail->next = head;
 				}
-				prev = ptr;
-				ptr = ptr->next;
+				else {
+					prev->next = ptr->next;
+					delete ptr;
+					ptr = prev;
+				}
+				count++;
+				size--;
 			}
-			return count;
+			prev = ptr;
+			ptr = ptr->next;
+		}
+		return count;
 	}
 };
