@@ -117,8 +117,7 @@ public:
 			  sz--;
 		  }
 		  else {
-			  delete head;
-			  delete tail; // Frees head and tail memory
+			  delete head; // Frees head and tail memory
 			  sz--;
 		  }
 

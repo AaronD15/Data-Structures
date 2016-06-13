@@ -50,18 +50,16 @@ public:
 	SingleNode<t> * TAIL() const { return tail; }
 
 	int count(t const & data) const {
-		if (size == 0)
-		{
-			cout << "List Empty" << endl;
-			return 0;
-		}
+
 		int count = 0;
 		SingleNode<t> *ptr = head;
 		SingleNode<t> *ptr2 = tail;
+
 		if (ptr == NULL) {
-			cout << "List Empty" << endl;
-			return -1;
+			cout << endl << "List Empty" << endl;
+			return 0;
 		}
+
 		if (ptr2->data == data) { count++; }
 		while (ptr->next != head && ptr->next != NULL) {
 			if (ptr->data == data) { count++; }
