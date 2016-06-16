@@ -22,7 +22,7 @@ int main() {
       cout << "9. Clear" << endl;
       cout << "--> ";
       cin >> selection;
-      cin.get();
+	  cin.ignore();
       string data;
 
       switch(selection){

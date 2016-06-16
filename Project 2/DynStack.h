@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdexcept>
+#include <string>
 
 using namespace std;
 
@@ -83,32 +84,28 @@ public:
   }
 
   int erase(Type const & data) {
-    // Erases elements that contain the data of the argument
-    Type *temp = new Type[arraySize];
-    int i = 0;
-    int j = 0;
-    int erased = 0;
-    Type popped;
+	  // Erases elements that contain the data of the argument
+	  Type *temp = new Type[arraySize];
+	  int erased = 0;
+	  int i = 0;
+	  int countdown = count;
 
-    while(!empty()) {
-      popped = pop();
-      if(popped != data) {
-        temp[i++] = popped;
-      }
-      else
-        erased++;
-    }
+	  while (i < countdown) {
+		  temp[i++] = pop();
+	  }
 
-    count = i-1;
+	  i--;
 
-    delete[] array;
-    array = new Type[arraySize];
+	  while (i >= 0) {
+		  if (temp[i] != data)
+			  push(temp[i]);
+		  else
+			  erased++;
+		  i--;
+	  }
 
-    while(i >= 0) {
-        push(temp[i--]);
-    }
+	  delete[] temp;
 
-    return erased;
+	  return erased;
   }
-
 };
