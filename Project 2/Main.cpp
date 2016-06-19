@@ -1,5 +1,6 @@
 #include "DynStack.h"
 #include "HashTable.h"
+#include "DynQueue.h"
 #include <sstream>
 
 template <typename T>
@@ -19,6 +20,7 @@ int main() {
 
   HashTable<int,string> table;
   DynStack<string> ds;
+  DynQueue<string> dq;
   bool run1 = true;
   int selection;
 
@@ -112,7 +114,6 @@ int main() {
 
   case 2:   // DynStack START
     while(run2){
-      int selection;
       cout << endl;
       cout << "******Menu Program******" << endl;
       cout << "Please select an option." << endl;
@@ -185,9 +186,77 @@ int main() {
     }
   break; // DynStack END
 
-  case 3:
-  // DynQueue HERE
-  break;
+  case 3:   // DynQueue START
+  while(run2){
+    cout << endl;
+    cout << "******Menu Program******" << endl;
+    cout << "Please select an option." << endl;
+    cout << "0. Return to Main Menu" << endl;
+    cout << "1. Front" << endl;
+    cout << "2. Back" << endl;
+    cout << "3. Size" << endl;
+    cout << "4. Empty" << endl;
+    cout << "5. Capacity" << endl;
+    cout << "6. Display" << endl;
+    cout << "7. Enqueue" << endl;
+    cout << "8. Dequeue" << endl;
+    cout << "9. Clear" << endl;
+    cout << "10. Erase" << endl;
+    cout << "--> ";
+    cin >> selection;
+    cin.ignore();
+    string data;
+
+    switch(selection){
+      case 0:   // Return to Main Menu
+        run2 = false;
+      break;
+      case 1:   // Front
+        try{ cout << endl << "Front: " << dq.front() << endl;}
+        catch(const underflow_error &e)
+          { cout << endl << e.what() << endl;}
+      break;
+      case 2:   // Back
+        try{ cout << endl << "Back: " << dq.back() << endl;}
+        catch(const underflow_error &e)
+          { cout << endl << e.what() << endl;}
+      break;
+      case 3:   // Size
+        cout << endl << "Size: " << dq.size() << endl;
+      break;
+      case 4:   // Empty
+        cout << endl << (ds.empty() ? "Queue is empty.":"Queue is not empty") << endl;
+      break;
+      case 5:   // Capacity
+        cout << endl << "Capacity: " << dq.capacity() << endl;
+      break;
+      case 6:   // Display
+        cout << endl;
+        dq.display();
+      break;
+      case 7:   // Enqueue
+        cout << endl << "Insert data: ";
+        getline(cin,data);
+        dq.enqueue(data);
+      break;
+      case 8:   // Dequeue
+        try{ cout << endl << dq.dequeue() << " has been dequeued." << endl;}
+        catch(const underflow_error &e)
+          { cout << endl << e.what() << endl; }
+      break;
+      case 9:   // Clear
+        cout << endl;
+        dq.clear();
+      case 10:  // Erase
+        cout << endl << "Insert data: ";
+        getline(cin,data);
+        dq.erase(data);
+      break;
+      default:
+        cout << endl << "Invalid input." << endl;
+    }
+  }
+  break;  // DynQueue END
   default:
     cout << endl << "Invalid input." << endl;
 
