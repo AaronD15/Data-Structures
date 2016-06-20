@@ -16,8 +16,10 @@ private:
 
 public:
 	DynQueue(int n =13) : ihead(0), itail(-1), count(0) {
-		if (n < 1) initialSize = 1;
-		else initialSize = n;
+		cout << endl << "Please insert queue initial capacity: ";
+		cin >> initialSize;
+		if (n < 1)
+			initialSize = 1;
 		arraySize = initialSize;
 		Dqueue = new type[arraySize];
 	}

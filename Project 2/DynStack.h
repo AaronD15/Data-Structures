@@ -13,6 +13,11 @@ private:
   int arraySize;
 public:
   DynStack(int n = 13):initialSize(n),arraySize(initialSize),count(0){
+    cout << endl << "Please insert initial size of stack: ";
+    cin >> initialSize;
+    if(initialSize < n)
+      initialSize = n;
+    arraySize = initialSize;
     array = new Type[arraySize];
     /*cout << "Initial Size: " << initialSize << endl;
     cout << "Array Size: " << arraySize << endl;
